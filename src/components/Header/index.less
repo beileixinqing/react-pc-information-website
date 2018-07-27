@@ -1,0 +1,44 @@
+@import "../../style/mixin.less";
+.header{
+  margin-bottom:38px;
+  .logo-bar{
+    height: 90px;
+    line-height: 90px;
+    border-bottom: 2px solid @pubColor;
+    .logo {
+      width:100px;
+      height:auto;
+      margin-top:10px;
+    }
+    .logo-name{
+      width:160px;
+      height:auto;
+    }
+  }
+  .header-bar {
+    height: 48px;
+    line-height: 48px;
+    display: flex;
+    border-bottom: 2px solid @border;
+    ul {
+      width: auto;
+      height: 50px;
+      line-height: 50px;
+      li {
+        float: left;
+        height:100%;
+        width:auto;
+        margin-right: 100px;
+        a{
+          display: inline-block;
+          height:100%;
+          padding:0 15px;
+        }
+        .nav-active {
+          color: @white;
+          background-color:@pubColor;
+        }
+      }
+    }
+  }
+}

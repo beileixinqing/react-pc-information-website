@@ -1,0 +1,101 @@
+.borderTop(@size, @color) {
+  &::before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-top: @size solid @color;
+    @media screen and (-webkit-min-device-pixel-ratio: 3) {
+      transform: scaleY(0.33333);
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 2) {
+      transform: scaleY(0.5);
+    }
+  }
+}
+
+.borderBottom(@size, @color) {
+  &::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    border-top: @size solid @color;
+    @media screen and (-webkit-min-device-pixel-ratio: 3) {
+      transform: scaleY(0.33333);
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 2) {
+      transform: scaleY(0.5);
+    }
+  }
+}
+
+.verticalBorder(@size, @color) {
+  &::before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-top: @size solid @color;
+    @media screen and (-webkit-min-device-pixel-ratio: 3) {
+      transform: scaleY(0.33333);
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 2) {
+      transform: scaleY(0.5);
+    }
+  }
+
+  &::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    border-top: @size solid @color;
+    @media screen and (-webkit-min-device-pixel-ratio: 3) {
+      transform: scaleY(0.33333);
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 2) {
+      transform: scaleY(0.5);
+    }
+  }
+}
+
+.font-dpr(@font-size) {
+  font-size: @font-size;
+  [data-dpr="1"] & {
+    font-size: @font-size;
+  }
+  [data-dpr="2"] & {
+    font-size: @font-size * 1.8;
+  }
+  // for mx3
+  [data-dpr="2.5"] & {
+    font-size: @font-size * 1.8;
+  }
+  //for 小米note,for 小米mix
+  [data-dpr="2.75"] & {
+    font-size: @font-size * 2;
+  }
+  [data-dpr="3"] & {
+    font-size: @font-size * 2;
+  }
+  // for 三星note4 ,三星s6
+  [data-dpr="4"] & {
+    font-size: @font-size * 2;
+  }
+}
+//@pubColor:#0052D9;
+@pubColor:#016bbc;
+@border:#dedede;
+@hover:#2d8fdb;
+@white:#fff;
+@imgPath:"../assets/images";
+

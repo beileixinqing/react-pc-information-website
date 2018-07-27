@@ -1,0 +1,25 @@
+@import "../../style/mixin.less";
+.nav-bar{
+  width:100%;
+  height:40px;
+  line-height:40px;
+  border-bottom:2px solid @pubColor;
+  display: flex;
+  margin-bottom:38px;
+  .logo{
+    //display: inline-block;
+  }
+  ul{
+    width:auto;
+    height:40px;
+    line-height:40px;
+    margin-left:100px;
+    li{
+      float: left;
+      margin-right:100px;
+      .nav-active{
+        color:@pubColor;
+      }
+    }
+  }
+}
