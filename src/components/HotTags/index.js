@@ -41,7 +41,7 @@ export default class HotTags extends Component {
                 <ul className="tags-box">
                     {
                         tagsList.map((value, index) => {
-                            return (<li key={index}><Link to="/professor">{value.tag}</Link></li>)
+                            return (<li key={index}><Link to={"/news_list/tag/"+value.tag}>{value.tag}</Link></li>)
                         })
                     }
                 </ul>

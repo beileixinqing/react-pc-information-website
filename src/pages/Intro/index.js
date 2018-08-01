@@ -30,9 +30,9 @@ export default class Intro extends Component {
 
     render() {
         return (
-            <div className="wrapper">
+            <div>
                 <Header/>
-                <div className="introduction">
+                <div className="wrapper introduction">
                     <div className="container">
                         <div className="intro-title">
                             智库概况

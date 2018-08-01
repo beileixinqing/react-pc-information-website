@@ -1,14 +1,16 @@
+@import "../../style/mixin.less";
+@import "../../style/iconfont.css";
 .detailContainer{
   width: 1240px;
-  margin: 0 auto;
+  margin: 38px auto;
   display: flex;
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: flex-start;
   position: relative;
   .left-box-detail{
-    width: 740px;
-    margin-right:30px;
+    width: 954px;
+    margin-right:60px;
     display: flex;
     -webkit-box-align: start;
     -ms-flex-align: start;
@@ -58,6 +60,19 @@
         font-family: Politica;
         margin-bottom: 25px;
       }
+      .author{
+        text-align: center;
+        .avatar{
+          width:80px;
+          height:80px;
+          margin-bottom:10px;
+          img{
+            width:100%;
+            height:100%;
+            border-radius: 50%;
+          }
+        }
+      }
     }
     .detail-content{
       .detail-title{
@@ -66,21 +81,33 @@
         margin-bottom:30px;
       }
       .detail-article{
-        text-align: center;
-        font-size: 14px;
+        text-align: left;
+        font-size: 18px;
         line-height:30px;
+        p{
+          word-wrap: break-word;
+          text-align: justify;
+          margin: 0 0 20px;
+          color: #505050;
+          line-height: 1.647;
+          padding: 0;
+        }
         img{
-          width:80%;
           height:auto;
-          vertical-align: middle;
+          display: block;
+          max-width: 100%;
+          background: #efefef;
+          border-radius: 0;
+          margin:8px auto;
         }
       }
       .end-line{
         text-align: center;
+        margin-top:80px;
         .end-text{
           display: inline-block;
           background: #fff;
-          padding: 0 5px;
+          padding: 0 20px;
           position: relative;
           z-index:99;
         }
@@ -88,7 +115,7 @@
           span{
             display: inline-block;
             background: #fff;
-            padding: 0 10px;
+            padding: 0 5px;
           }
           &:after {
             content: "";
@@ -102,11 +129,47 @@
             z-index: -1;
           }
         }
+        .zan-text{
+          color:#CACACA;
+          .icon-box{
+            display: inline-block;
+            border:1px solid #CACACA;
+            border-radius: 50%;
+            width:66px;
+            height:66px;
+            text-align: center;
+            line-height:66px;
+            margin:80px auto;
+            cursor: pointer;
+            .icon-dianzan{
+              font-size:30px;
+              color:#CACACA;
+            }
+          }
+        }
+        .icon-active{
+          color:@pubColor;
+          .icon-box{
+            border:1px solid @pubColor;
+            .icon-dianzan{
+              color:@pubColor;
+            }
+          }
+        }
+      }
+      .statement{
+        color:#999;
+        margin-bottom:20px;
       }
       .code-box{
         border:1px dotted #000;
-        padding:28px 0 34px 0;
+        padding:20px;
         text-align: center;
+        font-size: 14px;
+        img{
+          width:210px;
+          height:210px;
+        }
       }
     }
   }

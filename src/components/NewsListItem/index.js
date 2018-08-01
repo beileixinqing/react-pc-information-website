@@ -11,9 +11,7 @@ export default class NewsListItem extends Component {
     }
     componentDidMount() {
         moment.locale('zh-cn');
-        // this.fetchNewsList();
     }
-
     render() {
         const news = this.props.news;
         const thumb = this.props.news.thumb;
@@ -26,25 +24,21 @@ export default class NewsListItem extends Component {
                         <img src={thumb[0]} alt=""/>
                     </div>
                     <div className="item-right-box">
-                        <div className="item-right-title">
-                            {news.title}
-                        </div>
-                        <div className="item-right-info">
+                        <div className="item-title" dangerouslySetInnerHTML = {{ __html:news.title }}></div>
+                        <div className="item-info">
                             <span className="info-avatar"><img src={news.avatar} alt=""/></span>
-                            {news.authorName}&nbsp;
-                            {news.like} &nbsp;
-                            {moment(news.createAt).fromNow()}
+                            <span className="right-margin-12">{news.authorName}</span>
+                            <span className="right-margin-12">{news.like} 赞</span>
+                            <span>{moment(news.createAt).fromNow()}</span>
                         </div>
                     </div>
                 </div>
             </Link>
         } else if (news.type === 'pic') {
-            let id=news.id;
+            let id='/detail/'+news.id;
             itemBox = <Link to={id}>
                 <div className="item-box">
-                    <div className="item-title">
-                        {news.title}
-                    </div>
+                    <div className="item-title" dangerouslySetInnerHTML = {{ __html:news.title }}></div>
                     <div className="item-img-box">
                         {
                             thumb.map((value, index) => {
@@ -54,24 +48,22 @@ export default class NewsListItem extends Component {
                     </div>
                     <div className="item-info">
                         <span className="info-avatar"><img src={news.avatar} alt=""/></span>
-                        {news.authorName}&nbsp;
-                        {news.like} &nbsp;
-                        {moment(news.createAt).fromNow()}
+                        <span className="right-margin-12">{news.authorName}</span>
+                        <span className="right-margin-12">{news.like} 赞</span>
+                        <span>{moment(news.createAt).fromNow()}</span>
                     </div>
                 </div>
             </Link>
         } else if (news.type === 'text') {
-            let id=news.id;
+            let id='/detail/'+news.id;
             itemBox = <Link to={id}>
                 <div className="item-box">
-                    <div className="item-title">
-                        {news.title}
-                    </div>
+                    <div className="item-title" dangerouslySetInnerHTML = {{ __html:news.title }}></div>
                     <div className="item-info">
                         <span className="info-avatar"><img src={news.avatar} alt=""/></span>
-                        {news.authorName}&nbsp;
-                        {news.like} &nbsp;
-                        {moment(news.createAt).fromNow()}
+                        <span className="right-margin-12">{news.authorName}</span>
+                        <span className="right-margin-12">{news.like} 赞</span>
+                        <span>{moment(news.createAt).fromNow()}</span>
                     </div>
                 </div>
             </Link>

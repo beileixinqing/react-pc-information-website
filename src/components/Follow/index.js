@@ -6,9 +6,6 @@ import code from '../../images/zhiku_qrcode.jpg';
 import logoName from '../../images/logo_name.png';
 
 export default class Follow extends Component {
-    constructor(props){
-        super(props);
-    }
     render() {
         return (
             <div className="follow-wrap">

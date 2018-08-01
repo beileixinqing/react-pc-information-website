@@ -1,0 +1,53 @@
+@import "../../style/iconfont.css";
+@import "../../style/mixin.less";
+.tool-bar{
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  margin-left: 588px;
+  .tool-item{
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: @pubColor;
+    cursor: pointer;
+    margin-bottom: 2px;
+    transition: all .4s;
+    color:#fff;
+    .tool-item-hover{
+      display: none;
+    }
+    &:hover{
+      .tool-item-hover{
+        display: block;
+      }
+    }
+    .code-hover{
+      position: absolute;
+      top: -6px;
+      left: -100px;
+      img{
+        width:100px;
+        height:100px;
+      }
+      p{
+        color:#000;
+        position: absolute;
+        top: 88px;
+        left:10px;
+        font-size: 10px;
+      }
+    }
+    .text-hover{
+      background-color:@pubColor;
+      color:#fff;
+      position: absolute;
+      top: 43px;
+      left: -60px;
+      height:40px;
+      line-height:40px;
+      padding:0 10px;
+      font-size: 12px;
+    }
+  }
+}

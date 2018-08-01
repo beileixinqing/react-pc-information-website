@@ -1,36 +1,71 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import './index.less';
 
 import Header from '../../components/Header';
+import ToolBar from '../../components/ToolBar';
 import Footer from '../../components/Footer';
+import channelId from '../../config/channel'
 
 export default class ProfessorList extends Component {
     constructor(props){
         super(props);
         this.state = {
-            filterText: '',
-            inStockOnly: true,
+            professorList: [],
         };
-        this.handleSearch=this.handleSearch.bind(this);
-        this.handleCheckBox=this.handleCheckBox.bind(this);
+        this.fetchProfessorList=this.fetchProfessorList.bind(this);
     }
-    handleSearch(keywods){
-        this.setState({
-            filterText:keywods
+    fetchProfessorList(){
+        let _this=this;
+        fetch(`http://120.77.215.34:9001/web/pub/list_pub_in_channel?channelId=${channelId.dev}&page=0&size=6`,{
+            method:'GET',
+            mode:'cors',
+        }).then(function(response){
+            return response.json().then(function(res){
+                console.log(res)
+                _this.setState({
+                    professorList:res.content
+                });
+            });
+        }).then(function(res){
+            console.log(res);
         });
     }
-    handleCheckBox(checkBoxStatus){
-        this.setState({
-            inStockOnly:checkBoxStatus
-        });
+    componentDidMount(){
+        this.fetchProfessorList();
     }
     render() {
+        let professorList=this.state.professorList;
         return (
-            <div className="container">
+            <div>
                 <Header/>
-                专家列表
-                {/*<img src={logo} className="IndexContainer-logo" alt="logo" />*/}
-                {/*<h1 className="">Welcome to React</h1>*/}
+                <div className="container">
+                    <div className="professor-list-box">
+                        <ul>
+                            {
+                                professorList.map((value, index) => {
+                                    return (
+                                        <li key={index}>
+                                            <Link to={"/news_list/professor/"+value.pubId}>
+                                                <div className="professor-avatar">
+                                                    <img src={value.avatarUrl} alt=""/>
+                                                </div>
+                                                <div className="professor-info">
+                                                    <div className="professor-name">
+                                                        {value.name}
+                                                    </div>
+                                                    <div className="professor-intro">
+                                                        {value.introduction}
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        </li>)
+                                })
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <ToolBar/>
                 <Footer/>
             </div>
         );

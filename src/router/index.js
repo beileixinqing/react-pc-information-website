@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link,Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
 import Index from '../pages/Index';
 import NewsDetail from '../pages/NewsDetail';
 import Intro from '../pages/Intro';
@@ -7,7 +7,9 @@ import About from '../pages/About';
 import Contact from '../pages/Contact';
 import Search from '../pages/Search';
 import ProfessorList from '../pages/ProfessorList';
-import ProfessorIndex from '../pages/ProfessorIndex';
+import Professor from '../pages/Professor';
+import Tag from '../pages/Tag';
+import NoMatch from '../pages/NoMatch';
 
 const routes = [
     {
@@ -31,10 +33,10 @@ const routes = [
         path: "/professor_list",
         component: ProfessorList
     },
-    {
-        path: "/professor_index",
-        component: ProfessorIndex
-    },
+    // {
+    //     path: "/professor_index",
+    //     component: ProfessorIndex
+    // },
     {
         path: "/about",
         component: About
@@ -44,23 +46,38 @@ const routes = [
         component: Contact
     },
     {
-        path: "/search",
+        path: "/news_list/search/:id",
         component: Search
     },
-    // {
-    //     path: "/tacos",
-    //     component: Tacos,
-    //     routes: [
-    //         {
-    //             path: "/tacos/bus",
-    //             component: Bus
-    //         },
-    //         {
-    //             path: "/tacos/cart",
-    //             component: Cart
-    //         }
-    //     ]
-    // }
+    {
+        path: "/news_list/professor/:id",
+        component: Professor
+    },
+    {
+        path: "/news_list/tag/:tag",
+        component: Tag
+    },
+    {
+        component: NoMatch
+    },
+    /*{
+        path: "/news_list",
+        component: NewsList,
+        routes: [
+            {
+                path: "/news_list/search/:id",
+                component: Search
+            },
+            {
+                path: "/news_list/professor/:id",
+                component: Professor
+            },
+            {
+                path: "/news_list/tag/:tag",
+                component: Tag
+            }
+        ]
+    }*/
 ];
 
 const RouteWithSubRoutes = route => (

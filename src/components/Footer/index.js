@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './index.less';
 import 'whatwg-fetch'
 
@@ -61,9 +61,9 @@ export default class NewsList extends Component {
                 <p>
                     &copy; Copyright &copy;2003-2018 HEYDAY INTERACTIVE IT CO., LTD.
                 </p>
-                <p>
-                   华语互动 版权所有 · 京ICP备17015534号-1
-                </p>
+                <p>华语经纬（北京）国际文化发展中心</p>
+                <p>Chinese Jingwei (Beijing) International Cultural Development Center</p>
+                <p>京ICP备17015534号</p>
             </footer>
         );
     }

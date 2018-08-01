@@ -19,7 +19,6 @@ export default class ProfessorList extends Component {
             mode:'cors',
         }).then(function(response){
             return response.json().then(function(res){
-                console.log(res)
                 _this.setState({
                     professorList:res.content
                 });
@@ -41,7 +40,7 @@ export default class ProfessorList extends Component {
                         professorList.map((value, index) => {
                             return (
                                 <li key={index}>
-                                    <Link to="/professor_index">
+                                    <Link to={"/news_list/professor/"+value.pubId}>
                                         <div className="avatarBox">
                                             <img src={value.avatarUrl} alt=""/>
                                         </div>
@@ -52,6 +51,11 @@ export default class ProfessorList extends Component {
                         })
                     }
                 </ul>
+                <Link to="/professor_list">
+                    <div className="btn-more">
+                        查看更多
+                    </div>
+                </Link>
             </div>
         );
     }
