@@ -4,6 +4,7 @@ import moment from 'moment'
 import 'moment/locale/zh-cn';
 import './index.less';
 import code from '../../images/zhiku_qrcode.jpg';
+import loading from '../../images/loading.gif';
 
 import host from '../../config/host'
 
@@ -20,7 +21,9 @@ export default class NewsDetail extends Component {
             like:false,
             likeCount:0,
             avatarUrl:"",
-            pubId:""
+            pubId:"",
+            intro:"",
+            loading:true
         };
         this.fetchDetail=this.fetchDetail.bind(this);
         this.clickToLike=this.clickToLike.bind(this);
@@ -56,6 +59,9 @@ export default class NewsDetail extends Component {
             method:'GET',
             mode:'cors',
         }).then(function(response){
+            _this.setState({
+                loading:false
+            })
             return response.json().then(function(res){
                 _this.setState({
                     newsDetail:res.news,
@@ -85,60 +91,66 @@ export default class NewsDetail extends Component {
                 return (<Link to={"/news_list/tag/"+value} key={index} className="tagItem">{value}</Link>)
             })
         }
+        let detail=null;
+        if(this.state.loading===true){
+            detail=<div className="text-center"><img src={loading} alt=""/> 加载中 </div>
+        }else{
+            detail=<div className="detailContainer">
+                <div className="left-box-detail">
+                    <div className="detail-info">
+                        <div className="year through">
+                            <span>{year}</span>
+                        </div>
+                        <div className="md">
+                            {date}
+                        </div>
+                        <div className="time">
+                            {time}
+                        </div>
+                        <div>
+                            <Link className="author" to={"/news_list/professor/"+this.state.pubId}>
+                                <div className="avatar">
+                                    <img src={this.state.avatarUrl} alt=""/>
+                                </div>
+                                <div>
+                                    {newsDetail.authorName}
+                                </div>
+                                <br/>
+                                <div>
+                                    {this.state.intro}
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="detail-content">
+                        <div className="detail-title">{newsDetail.title}</div>
+                        <div className="detail-article" dangerouslySetInnerHTML = {{ __html:newsDetail.content }}></div>
+                        <div className="end-line">
+                            <p className="end-text through"><span>THE END</span></p>
+                            <div className={`zan-text ${this.state.like === true ? "icon-active" : ""}`} >
+                                <div className="icon-box" onClick={this.clickToLike}>
+                                    <i className="iconfont icon-dianzan"></i>
+                                </div>
+                                &nbsp;&nbsp;{this.state.likeCount}
+                            </div>
+                            <p className="tag-info">标签： {tagList}</p>
+                            <p className="statement">本文系华语智库专家 {newsDetail.authorName} 专稿，转载请注明出处、作者和本文链接</p>
+                        </div>
+                        <div className="code-box">
+                            <img src={code} alt=""/>
+                            <p>
+                                还没看够？扫描识别上方二维码，或在微信公众号中搜索「华语智库」或「huayujunshi」，即可获得华语智库每日最新内容推送、参与互动活动。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <ProfessorList />
+            </div>
+        }
         return (
             <div>
                 <Header/>
-                <div className="detailContainer">
-                    <div className="left-box-detail">
-                        <div className="detail-info">
-                            <div className="year through">
-                                <span>{year}</span>
-                            </div>
-                            <div className="md">
-                                {date}
-                            </div>
-                            <div className="time">
-                                {time}
-                            </div>
-                            <div>
-                                <Link className="author" to={"/news_list/professor/"+this.state.pubId}>
-                                    <div className="avatar">
-                                        <img src={this.state.avatarUrl} alt=""/>
-                                    </div>
-                                    <div>
-                                        {newsDetail.authorName}
-                                    </div>
-                                    <br/>
-                                    <div>
-                                        {this.state.intro}
-                                    </div>
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="detail-content">
-                            <div className="detail-title">{newsDetail.title}</div>
-                            <div className="detail-article" dangerouslySetInnerHTML = {{ __html:newsDetail.content }}></div>
-                            <div className="end-line">
-                                <p className="end-text through"><span>THE END</span></p>
-                                <div className={`zan-text ${this.state.like === true ? "icon-active" : ""}`} >
-                                    <div className="icon-box" onClick={this.clickToLike}>
-                                        <i className="iconfont icon-dianzan"></i>
-                                    </div>
-                                    &nbsp;&nbsp;{this.state.likeCount}
-                                </div>
-                                <p className="tag-info">标签： {tagList}</p>
-                                <p className="statement">本文系华语智库专家 {newsDetail.authorName} 专稿，转载请注明出处、作者和本文链接</p>
-                            </div>
-                            <div className="code-box">
-                                <img src={code} alt=""/>
-                                <p>
-                                    还没看够？扫描识别上方二维码，或在微信公众号中搜索「华语智库」或「huayujunshi」，即可获得华语智库每日最新内容推送、参与互动活动。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <ProfessorList />
-                </div>
+                {detail}
                 <ToolBar/>
                 <Footer/>
             </div>

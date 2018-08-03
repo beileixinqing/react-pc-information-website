@@ -200,7 +200,6 @@ export default class NewsList extends Component {
         }
     }
     componentDidMount(){
-        console.log(host)
         this.fetchNewsList(this.props.id,this.props.type);
     }
     componentWillReceiveProps(nextProps) {

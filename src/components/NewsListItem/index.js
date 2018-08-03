@@ -21,7 +21,8 @@ export default class NewsListItem extends Component {
             itemBox = <Link to={id}>
                 <div className="item-box">
                     <div className="item-left-box">
-                        <img src={thumb[0]} alt=""/>
+                        {/*<img src={thumb[0]} alt=""/>*/}
+                        <div style={{display:'inline-block',width:'208px',height:'150px',background:`url("${thumb[0]}")`,backgroundReapeat:"no-repeat",backgroundPositon:"center center",backgroundSize:"cover"}}></div>
                     </div>
                     <div className="item-right-box">
                         <div className="item-title" dangerouslySetInnerHTML = {{ __html:news.title }}></div>
@@ -42,7 +43,10 @@ export default class NewsListItem extends Component {
                     <div className="item-img-box">
                         {
                             thumb.map((value, index) => {
-                                return (<img src={value} alt="" key={index}/>)
+                                return (<div style={{display:'inline-block',width:'32%',height:'150px',marginRight:"5px",background:`url("${value}")`,backgroundReapeat:"no-repeat",backgroundPositon:"center center",backgroundSize:"cover"}} key={index}></div>)
+                                // return (
+                                //     <img src={value} alt=""/>
+                                // )
                             })
                         }
                     </div>
