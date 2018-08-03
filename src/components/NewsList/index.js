@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './index.less';
 import 'whatwg-fetch'
+// import host from '../../../config/host'
+import host from '../../config/host'
 
 import NewsListItem from '../../components/NewsListItem';
 import loading from '../../images/loading.gif';
@@ -23,7 +25,7 @@ export default class NewsList extends Component {
     fetchNewsList(id,type){
         let _this=this;
         if(type==='pub'){
-            fetch(`http://120.77.215.34:9001/web/news/list_by_follow?pubId=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+            fetch(`${host}/web/news/list_by_follow?pubId=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -40,7 +42,7 @@ export default class NewsList extends Component {
                 // console.log(res);
             });
         }else if(type==='index'){
-            fetch(`http://120.77.215.34:9001/web/news/list?channelId=${channelId.dev}&page=${_this.state.page}&size=${_this.state.size}`,{
+            fetch(`${host}/web/news/list?channelId=${channelId}&page=${_this.state.page}&size=${_this.state.size}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -57,7 +59,7 @@ export default class NewsList extends Component {
                 // console.log(res);
             });
         }else if(type==='tag'){
-            fetch(`http://120.77.215.34:9001/web/news/list_by_tag?channelId=${channelId.dev}&tag=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+            fetch(`${host}/web/news/list_by_tag?channelId=${channelId}&tag=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -74,7 +76,7 @@ export default class NewsList extends Component {
                 // console.log(res);
             });
         }else if(type==='search'){
-            fetch(`http://120.77.215.34:9001/web/news/search?q=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+            fetch(`${host}/web/news/search?q=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -102,7 +104,7 @@ export default class NewsList extends Component {
                 page:page
             },function () {
                 if(_this.state.page<_this.state.totalPages){
-                    fetch(`http://120.77.215.34:9001/web/news/list_by_follow?pubId=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+                    fetch(`${host}/web/news/list_by_follow?pubId=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                         method:'GET',
                         mode:'cors',
                     }).then(function(response){
@@ -126,7 +128,7 @@ export default class NewsList extends Component {
                 page:page
             },function () {
                 if(_this.state.page<_this.state.totalPages){
-                    fetch(`http://120.77.215.34:9001/web/news/list?channelId=${channelId.dev}&page=${_this.state.page}&size=${_this.state.size}`,{
+                    fetch(`${host}/web/news/list?channelId=${channelId}&page=${_this.state.page}&size=${_this.state.size}`,{
                         method:'GET',
                         mode:'cors',
                     }).then(function(response){
@@ -150,7 +152,7 @@ export default class NewsList extends Component {
                 page:page
             },function () {
                 if(_this.state.page<_this.state.totalPages){
-                    fetch(`http://120.77.215.34:9001/web/news/list_by_tag?channelId=${channelId.dev}&tag=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+                    fetch(`${host}/web/news/list_by_tag?channelId=${channelId}&tag=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                         method:'GET',
                         mode:'cors',
                     }).then(function(response){
@@ -174,7 +176,7 @@ export default class NewsList extends Component {
                 page:page
             },function () {
                 if(_this.state.page<_this.state.totalPages){
-                    fetch(`http://120.77.215.34:9001/web/news/search?q=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+                    fetch(`${host}/web/news/search?q=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                         method:'GET',
                         mode:'cors',
                     }).then(function(response){
@@ -198,6 +200,7 @@ export default class NewsList extends Component {
         }
     }
     componentDidMount(){
+        console.log(host)
         this.fetchNewsList(this.props.id,this.props.type);
     }
     componentWillReceiveProps(nextProps) {
@@ -230,12 +233,6 @@ export default class NewsList extends Component {
         return (
             <div>
                 {list}
-                {/*{newsList.map((value,index) => {*/}
-                    {/*return (<NewsListItem news={value} key={index} />)*/}
-                    {/*})*/}
-                {/*}*/}
-                {/*<div className="btn-more transition" onClick={this.fetchMoreList}>{this.state.loadingText}</div>*/}
-
             </div>
         );
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import './index.less';
+import host from '../../config/host'
 
 import Header from '../../components/Header';
 import ToolBar from '../../components/ToolBar';
@@ -17,7 +18,7 @@ export default class ProfessorList extends Component {
     }
     fetchProfessorList(){
         let _this=this;
-        fetch(`http://120.77.215.34:9001/web/pub/list_pub_in_channel?channelId=${channelId.dev}&page=0&size=6`,{
+        fetch(`${host}/web/pub/list_pub_in_channel?channelId=${channelId}`,{
             method:'GET',
             mode:'cors',
         }).then(function(response){
@@ -36,6 +37,7 @@ export default class ProfessorList extends Component {
     }
     render() {
         let professorList=this.state.professorList;
+        console.log(professorList)
         return (
             <div>
                 <Header/>

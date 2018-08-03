@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment'
 import 'moment/locale/zh-cn';
 import './index.less';
+import host from '../../config/host'
 
 import Header from '../../components/Header';
 import ProfessorList from '../../components/ProfessorList';
@@ -22,7 +23,7 @@ export default class Professor extends Component {
     fetchDetail(match){
         let _this=this;
         let id=match.params.id;
-        fetch(`http://120.77.215.34:9001/web/pub/info?id=${id}`,{
+        fetch(`${host}/web/pub/info?id=${id}`,{
             method:'GET',
             mode:'cors',
         }).then(function(response){

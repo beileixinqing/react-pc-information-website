@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import './index.less';
+import channelId from '../../config/channel'
+import host from '../../config/host'
 
 import TitleText from '../TitleText';
-// import Header from '../../components/Header';
-// import Footer from '../../components/Footer';
-// import IndexContent from '../IndexContent';
 
 export default class HotTags extends Component {
     constructor(props){
@@ -17,7 +16,7 @@ export default class HotTags extends Component {
     }
     fetchHotTags(){
         let _this=this;
-        fetch(`http://120.77.215.34:9001/web/news/list_channel_tags?channelId=586b5112abb8aa1973d1a661&page=1&size=10`,{
+        fetch(`${host}/web/news/list_channel_tags?channelId=${channelId}&page=1&size=10`,{
             method:'GET',
             mode:'cors',
         }).then(function(response){

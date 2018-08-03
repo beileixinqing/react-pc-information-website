@@ -5,6 +5,8 @@ import 'moment/locale/zh-cn';
 import './index.less';
 import code from '../../images/zhiku_qrcode.jpg';
 
+import host from '../../config/host'
+
 import Header from '../../components/Header';
 import ProfessorList from '../../components/ProfessorList';
 import ToolBar from '../../components/ToolBar';
@@ -27,7 +29,7 @@ export default class NewsDetail extends Component {
         let _this=this;
         let id=_this.props.match.params.id;
         if(_this.state.like===false){
-            fetch(`http://120.77.215.34:9001/web/news/like?newsId=${id}`,{
+            fetch(`${host}/web/news/like?newsId=${id}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -50,7 +52,7 @@ export default class NewsDetail extends Component {
     fetchDetail(){
         let _this=this;
         let id=_this.props.match.params.id;
-        fetch(`http://120.77.215.34:9001/web/news/detail_and_pub_info?id=${id}`,{
+        fetch(`${host}/web/news/detail_and_pub_info?id=${id}`,{
             method:'GET',
             mode:'cors',
         }).then(function(response){
@@ -58,8 +60,9 @@ export default class NewsDetail extends Component {
                 _this.setState({
                     newsDetail:res.news,
                     likeCount:res.news.like,
-                    avatarUrl:res.pubInfo.avatarUrl,
-                    pubId:res.pubInfo.pubId
+                    avatarUrl:res.pubInfo?res.pubInfo.avatarUrl:"https://cdn.zhongwentoutiao.com/user%403x.png",
+                    pubId:res.pubInfo?res.pubInfo.pubId:"",
+                    intro:res.pubInfo?res.pubInfo.introduction:"",
                 });
             });
         }).then(function(res){
@@ -76,7 +79,12 @@ export default class NewsDetail extends Component {
         let year=createAt.split("-")[0];
         let date=createAt.split("-")[1];
         let time=createAt.split("-")[2];
-
+        let tagList="";
+        if(newsDetail.tag&&newsDetail.tag.length>0){
+            tagList=newsDetail.tag.map((value,index) => {
+                return (<Link to={"/news_list/tag/"+value} key={index} className="tagItem">{value}</Link>)
+            })
+        }
         return (
             <div>
                 <Header/>
@@ -100,7 +108,10 @@ export default class NewsDetail extends Component {
                                     <div>
                                         {newsDetail.authorName}
                                     </div>
-                                    {/*<span className="qiehao">企鹅号</span>*/}
+                                    <br/>
+                                    <div>
+                                        {this.state.intro}
+                                    </div>
                                 </Link>
                             </div>
                         </div>
@@ -115,6 +126,7 @@ export default class NewsDetail extends Component {
                                     </div>
                                     &nbsp;&nbsp;{this.state.likeCount}
                                 </div>
+                                <p className="tag-info">标签： {tagList}</p>
                                 <p className="statement">本文系华语智库专家 {newsDetail.authorName} 专稿，转载请注明出处、作者和本文链接</p>
                             </div>
                             <div className="code-box">

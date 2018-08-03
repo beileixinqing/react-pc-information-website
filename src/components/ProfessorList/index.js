@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import './index.less';
+import channelId from '../../config/channel'
+import host from '../../config/host'
 
 import TitleText from '../TitleText';
 
@@ -14,7 +16,7 @@ export default class ProfessorList extends Component {
     }
     fetchProfessorList(){
         let _this=this;
-        fetch(`http://120.77.215.34:9001/web/pub/list_pub_in_channel?channelId=586b5112abb8aa1973d1a661&page=0&size=6`,{
+        fetch(`${host}/web/pub/list_pub_in_channel?channelId=${channelId}&page=0&size=6`,{
             method:'GET',
             mode:'cors',
         }).then(function(response){
