@@ -18,7 +18,7 @@ export default class ProfessorList extends Component {
     }
     fetchProfessorList(){
         let _this=this;
-        fetch(`${host}/web/pub/list_pub_in_channel?channelId=${channelId}`,{
+        fetch(`${host}/web/pub/list_pub_in_channel?channelId=${channelId}&page=0&size=300`,{
             method:'GET',
             mode:'cors',
         }).then(function(response){
