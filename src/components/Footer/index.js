@@ -49,14 +49,14 @@ export default class NewsList extends Component {
             <footer className="container">
                 <p>
                     {footerItem.map((value,index) => {
-                        return (<span><Link to={value.link} key={index}>{value.name}</Link>|</span>)
+                        return (<span><Link to={value.link} key={index}>{value.name}</Link></span>)
                         })
                     }
-                    <a href="https://www.lagou.com/gongsi/j162749.html/" target="_blank">加入我们</a>
-                    |
-                    <a href="https://www.zhongwentoutiao.com/" target="_blank">译世界资讯</a>
-                    |
-                    <a href="https://www.shuzizhongwen.com/" target="_blank">唐人家</a>
+                    {/*<a href="https://www.lagou.com/gongsi/j162749.html/" target="_blank">加入我们</a>*/}
+                    {/*|*/}
+                    {/*<a href="https://www.zhongwentoutiao.com/" target="_blank">译世界资讯</a>*/}
+                    {/*|*/}
+                    {/*<a href="https://www.shuzizhongwen.com/" target="_blank">唐人家</a>*/}
                 </p>
                 <p>
                     &copy; Copyright &copy;2003-2018 HEYDAY INTERACTIVE IT CO., LTD.
