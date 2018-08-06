@@ -33,7 +33,9 @@ export default class Professor extends Component {
                 });
             });
         }).then(function(res){
-            console.log(res);
+            if(res){
+                console.log(res);
+            }
         });
     }
     componentDidMount(){

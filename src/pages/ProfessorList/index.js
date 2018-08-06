@@ -23,13 +23,14 @@ export default class ProfessorList extends Component {
             mode:'cors',
         }).then(function(response){
             return response.json().then(function(res){
-                console.log(res)
                 _this.setState({
                     professorList:res.content
                 });
             });
         }).then(function(res){
-            console.log(res);
+            if(res){
+                console.log(res);
+            }
         });
     }
     componentDidMount(){
@@ -37,7 +38,6 @@ export default class ProfessorList extends Component {
     }
     render() {
         let professorList=this.state.professorList;
-        console.log(professorList)
         return (
             <div>
                 <Header/>
