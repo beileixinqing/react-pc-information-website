@@ -12,14 +12,14 @@ const footerItem=[
     //     name:"隐私声明",
     //     link:""
     // },
-    {
-        name:"关于我们",
-        link:"/about"
-    },
-    {
-        name:"联系我们",
-        link:"/contact"
-    },
+    // {
+    //     name:"关于我们",
+    //     link:"/about"
+    // },
+    // {
+    //     name:"联系我们",
+    //     link:"/contact"
+    // },
     /*{
         name:"生活社区公约",
         link:""

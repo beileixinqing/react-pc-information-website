@@ -3,6 +3,7 @@ import './index.less';
 
 import Header from '../../components/Header';
 import ProfessorList from '../../components/ProfessorList';
+import HotNewsList from '../../components/HotNewsList';
 import NewsList from '../../components/NewsList';
 import HotTags from '../../components/HotTags';
 import Follow from '../../components/Follow';
@@ -38,6 +39,7 @@ export default class Tag extends Component {
                         </div>
                         <div className="right-box">
                             <ProfessorList/>
+                            <HotNewsList/>
                             <HotTags/>
                             <Follow/>
                         </div>

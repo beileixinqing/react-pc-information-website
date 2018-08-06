@@ -16,6 +16,34 @@ export default class NewsListItem extends Component {
         const news = this.props.news;
         const thumb = this.props.news.thumb;
         let itemBox = null;
+        let authorInfo=null;
+        if(news.authorName!=='华语智库'){
+            if(news.pubInfo){
+                authorInfo=<div className="item-info">
+                    <div className="clearfix col-3" style={{"marginBottom":"16px"}}>
+                        <span className="lf info-avatar"><img src={news.pubInfo.avatarUrl} alt=""/></span>
+                        <div className="lf" style={{"width":"85%"}}>
+                            <p className="right-margin-12">{news.authorName}</p>
+                            <p className="right-margin-12">{news.pubInfo.introduction}</p>
+                        </div>
+                    </div>
+                    <span className="right-margin-12">{news.like} 赞</span>
+                    <span>{moment(news.createAt).fromNow()}</span>
+                </div>;
+            }else{
+                authorInfo=<div className="item-info">
+                    <span className="right-margin-12">{news.authorName}</span>
+                    <span className="right-margin-12">{news.like} 赞</span>
+                    <span>{moment(news.createAt).fromNow()}</span>
+                </div>;
+            }
+        }else{
+            authorInfo=<div className="item-info">
+                <span className="right-margin-12">{news.authorName}</span>
+                <span className="right-margin-12">{news.like} 赞</span>
+                <span>{moment(news.createAt).fromNow()}</span>
+            </div>;
+        }
         if (news.type === 'little'||news.type === 'big'||news.type === 'auto') {
             let id='/detail/'+news.id;
             itemBox = <Link to={id}>
@@ -26,11 +54,8 @@ export default class NewsListItem extends Component {
                     </div>
                     <div className="item-right-box">
                         <div className="item-title" dangerouslySetInnerHTML = {{ __html:news.title }}></div>
-                        <div className="item-info">
-                            <span className="info-avatar"><img src={news.avatar} alt=""/></span>
-                            <span className="right-margin-12">{news.authorName}</span>
-                            <span className="right-margin-12">{news.like} 赞</span>
-                            <span>{moment(news.createAt).fromNow()}</span>
+                        <div>
+                            {authorInfo}
                         </div>
                     </div>
                 </div>
@@ -50,11 +75,8 @@ export default class NewsListItem extends Component {
                             })
                         }
                     </div>
-                    <div className="item-info">
-                        <span className="info-avatar"><img src={news.avatar} alt=""/></span>
-                        <span className="right-margin-12">{news.authorName}</span>
-                        <span className="right-margin-12">{news.like} 赞</span>
-                        <span>{moment(news.createAt).fromNow()}</span>
+                    <div>
+                        {authorInfo}
                     </div>
                 </div>
             </Link>
@@ -63,11 +85,8 @@ export default class NewsListItem extends Component {
             itemBox = <Link to={id}>
                 <div className="item-box">
                     <div className="item-title" dangerouslySetInnerHTML = {{ __html:news.title }}></div>
-                    <div className="item-info">
-                        <span className="info-avatar"><img src={news.avatar} alt=""/></span>
-                        <span className="right-margin-12">{news.authorName}</span>
-                        <span className="right-margin-12">{news.like} 赞</span>
-                        <span>{moment(news.createAt).fromNow()}</span>
+                    <div>
+                        {authorInfo}
                     </div>
                 </div>
             </Link>

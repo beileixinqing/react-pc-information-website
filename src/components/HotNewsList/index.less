@@ -1,0 +1,31 @@
+@import "../../style/mixin.less";
+.hot-news-list{
+  width:256px;
+  margin-bottom:30px;
+  overflow: hidden;
+  li{
+    padding:20px 0;
+    border-bottom:1px solid @border;
+    overflow:hidden;
+    .news-left{
+      float: left;
+      width:80px;
+      height:50px;
+      overflow: hidden;
+      margin-right: 10px;
+      img{
+        width:100%;
+        height:auto;
+        min-height:50px;
+      }
+    }
+    .news-right{
+      float: left;
+      width:166px;
+    }
+  }
+  .btn-more{
+    height:50px;
+    line-height:50px;
+  }
+}

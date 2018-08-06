@@ -25,7 +25,7 @@ export default class NewsList extends Component {
     fetchNewsList(id,type){
         let _this=this;
         if(type==='pub'){
-            fetch(`${host}/web/news/list_by_follow?pubId=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+            fetch(`${host}/web/news/list_by_follow_with_pub_info?pubId=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -42,7 +42,7 @@ export default class NewsList extends Component {
                 // console.log(res);
             });
         }else if(type==='index'){
-            fetch(`${host}/web/news/list?channelId=${channelId}&page=${_this.state.page}&size=${_this.state.size}`,{
+            fetch(`${host}/web/news/list_with_pub_info?channelId=${channelId}&page=${_this.state.page}&size=${_this.state.size}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -59,7 +59,7 @@ export default class NewsList extends Component {
                 // console.log(res);
             });
         }else if(type==='tag'){
-            fetch(`${host}/web/news/list_by_tag?channelId=${channelId}&tag=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+            fetch(`${host}/web/news/list_by_tag_with_pub_info?channelId=${channelId}&tag=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -76,7 +76,7 @@ export default class NewsList extends Component {
                 // console.log(res);
             });
         }else if(type==='search'){
-            fetch(`${host}/web/news/search?q=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+            fetch(`${host}/web/news/search_in_channel_with_pub_info?channelId=${channelId}&q=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -84,6 +84,9 @@ export default class NewsList extends Component {
                     loading:false
                 })
                 return response.json().then(function(res){
+                    if(res.content.length===0){
+                        _this.props.handleFetch("false");
+                    }
                     _this.setState({
                         newsList:res.content,
                         totalPages:res.totalPages
@@ -104,7 +107,7 @@ export default class NewsList extends Component {
                 page:page
             },function () {
                 if(_this.state.page<_this.state.totalPages){
-                    fetch(`${host}/web/news/list_by_follow?pubId=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+                    fetch(`${host}/web/news/list_by_follow_with_pub_info?pubId=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                         method:'GET',
                         mode:'cors',
                     }).then(function(response){
@@ -128,7 +131,7 @@ export default class NewsList extends Component {
                 page:page
             },function () {
                 if(_this.state.page<_this.state.totalPages){
-                    fetch(`${host}/web/news/list?channelId=${channelId}&page=${_this.state.page}&size=${_this.state.size}`,{
+                    fetch(`${host}/web/news/list_with_pub_info?channelId=${channelId}&page=${_this.state.page}&size=${_this.state.size}`,{
                         method:'GET',
                         mode:'cors',
                     }).then(function(response){
@@ -152,7 +155,7 @@ export default class NewsList extends Component {
                 page:page
             },function () {
                 if(_this.state.page<_this.state.totalPages){
-                    fetch(`${host}/web/news/list_by_tag?channelId=${channelId}&tag=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+                    fetch(`${host}/web/news/list_by_tag_with_pub_info?channelId=${channelId}&tag=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                         method:'GET',
                         mode:'cors',
                     }).then(function(response){
@@ -176,7 +179,7 @@ export default class NewsList extends Component {
                 page:page
             },function () {
                 if(_this.state.page<_this.state.totalPages){
-                    fetch(`${host}/web/news/search?q=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+                    fetch(`${host}/web/news/search_in_channel_with_pub_info?channelId=${channelId}q=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                         method:'GET',
                         mode:'cors',
                     }).then(function(response){
@@ -214,7 +217,7 @@ export default class NewsList extends Component {
             let keyword=this.props.id;
             newsList.filter((value,index) => {
                 var re =new RegExp(keyword,"g");
-                value.title=value.title.replace(re, `<span class="keyword">${keyword}</span>`);
+                return value.title=value.title.replace(re, `<span class="keyword">${keyword}</span>`);
             })
         }
         let list=null;

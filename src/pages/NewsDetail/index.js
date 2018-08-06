@@ -9,7 +9,7 @@ import loading from '../../images/loading.gif';
 import host from '../../config/host'
 
 import Header from '../../components/Header';
-import ProfessorList from '../../components/ProfessorList';
+import ProfessorNewsList from '../../components/ProfessorNewsList';
 import ToolBar from '../../components/ToolBar';
 import Footer from '../../components/Footer';
 
@@ -52,9 +52,8 @@ export default class NewsDetail extends Component {
             });
         }
     }
-    fetchDetail(){
+    fetchDetail(id){
         let _this=this;
-        let id=_this.props.match.params.id;
         fetch(`${host}/web/news/detail_and_pub_info?id=${id}`,{
             method:'GET',
             mode:'cors',
@@ -65,31 +64,47 @@ export default class NewsDetail extends Component {
             return response.json().then(function(res){
                 _this.setState({
                     newsDetail:res.news,
-                    likeCount:res.news.like,
+                    likeCount:res.news.like?res.news.like:"",
                     avatarUrl:res.pubInfo?res.pubInfo.avatarUrl:"https://cdn.zhongwentoutiao.com/user%403x.png",
                     pubId:res.pubInfo?res.pubInfo.pubId:"",
                     intro:res.pubInfo?res.pubInfo.introduction:"",
                 });
             });
         }).then(function(res){
-            console.log(res);
+            if(res){
+                console.log(res);
+            }
         });
+        console.log(this.state.pubId)
     }
     componentDidMount(){
-        this.fetchDetail();
+        this.fetchDetail(this.props.match.params.id);
         moment.locale('zh-cn');
+    }
+    componentWillReceiveProps(nextProps) {
+        let _this=this;
+        if (nextProps.match.params.id !== _this.props.match.params.id) {
+            _this.fetchDetail(nextProps.match.params.id);
+        }
+    }
+    shouldComponentUpdate(nextProps,nextState){
+        //写自己的逻辑判断是否需要更新组件
+        return true;
     }
     render() {
         let newsDetail=this.state.newsDetail;
+        console.log(newsDetail)
         let createAt=moment(newsDetail.createAt).format("YYYY-MM/DD-HH:MM:SS");
         let year=createAt.split("-")[0];
         let date=createAt.split("-")[1];
         let time=createAt.split("-")[2];
         let tagList="";
+        let tagInfo="";
         if(newsDetail.tag&&newsDetail.tag.length>0){
             tagList=newsDetail.tag.map((value,index) => {
                 return (<Link to={"/news_list/tag/"+value} key={index} className="tagItem">{value}</Link>)
             })
+            tagInfo=<p className="tag-info">标签：{tagList}</p>;
         }
         let detail=null;
         if(this.state.loading===true){
@@ -133,7 +148,7 @@ export default class NewsDetail extends Component {
                                 </div>
                                 &nbsp;&nbsp;{this.state.likeCount}
                             </div>
-                            <p className="tag-info">标签： {tagList}</p>
+                            <div>{tagInfo}</div>
                             <p className="statement">本文系华语智库专家 {newsDetail.authorName} 专稿，转载请注明出处、作者和本文链接</p>
                         </div>
                         <div className="code-box">
@@ -144,7 +159,7 @@ export default class NewsDetail extends Component {
                         </div>
                     </div>
                 </div>
-                <ProfessorList />
+                <ProfessorNewsList pubId={this.state.pubId} newsId={this.props.match.params.id} />
             </div>
         }
         return (

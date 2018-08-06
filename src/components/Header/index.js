@@ -60,6 +60,9 @@ export default class Header extends Component {
                                    <li>
                                        <NavLink to="/professor_list" activeClassName="nav-active">专家团队</NavLink>
                                    </li>
+                                   <li>
+                                       <NavLink to="/contact" activeClassName="nav-active">联系我们</NavLink>
+                                   </li>
                                </ul>
                            </div>
                        </div>

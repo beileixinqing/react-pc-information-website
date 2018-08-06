@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './index.less';
 
-import TopBar from '../../components/TopBar';
+// import TopBar from '../../components/TopBar';
+import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 import wxGroup from '../../images/wx_group.jpg';
@@ -29,7 +30,7 @@ export default class Contact extends Component {
     render() {
         return (
             <div>
-                <TopBar/>
+                <Header/>
                 <div className="container min-height">
                     <div className="text-box">
                         <h1 className="text-center">华语经纬（北京）国际文化发展中心</h1>

@@ -1,5 +1,3 @@
-'use strict';
-
 const NODE_ENV = process.env.NODE_ENV;
 if (NODE_ENV === 'development') {
     // module.exports = `http://120.77.215.34:9001`

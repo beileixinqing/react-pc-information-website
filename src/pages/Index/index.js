@@ -4,6 +4,7 @@ import './index.less';
 import Header from '../../components/Header';
 import NewsList from '../../components/NewsList';
 import ProfessorList from '../../components/ProfessorList';
+import HotNewsList from '../../components/HotNewsList';
 import HotTags from '../../components/HotTags';
 import Follow from '../../components/Follow';
 import ToolBar from '../../components/ToolBar';
@@ -21,6 +22,7 @@ export default class Index extends Component {
                         </div>
                         <div className="right-box">
                             <ProfessorList/>
+                            <HotNewsList/>
                             <HotTags/>
                             <Follow/>
                             <ToolBar/>
