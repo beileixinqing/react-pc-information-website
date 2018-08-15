@@ -2,7 +2,7 @@
 .item-container{
   border-bottom:1px solid @border;
   a{
-    display: inline-block;
+    display: block;
     width:100%;
     height:auto;
     .item-box{
@@ -14,7 +14,7 @@
       .item-left-box{
         float: left;
         width:208px;
-        height:150px;
+        height:158px;
         margin-right:30px;
         overflow: hidden;
         img{
@@ -68,6 +68,14 @@
       }
       .right-margin-12{
         margin-right:12px;
+      }
+      .author-intro{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        margin-top:5px;
       }
     }
     &:hover{

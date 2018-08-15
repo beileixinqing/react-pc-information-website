@@ -8,6 +8,7 @@ import Header from '../../components/Header';
 import ProfessorList from '../../components/ProfessorList';
 import NewsList from '../../components/NewsList';
 import HotTags from '../../components/HotTags';
+import HotNewsList from '../../components/HotNewsList';
 import Follow from '../../components/Follow';
 import ToolBar from '../../components/ToolBar';
 import Footer from '../../components/Footer';
@@ -33,12 +34,15 @@ export default class Professor extends Component {
                 });
             });
         }).then(function(res){
-            console.log(res);
+            if(res){
+                console.log(res);
+            }
         });
     }
     componentDidMount(){
         this.fetchDetail(this.props.match);
         moment.locale('zh-cn');
+        document.getElementById('root').scrollIntoView(true);//为ture返回顶部，false为底部
     }
     componentWillReceiveProps(nextProps) {
         let _this=this;
@@ -69,7 +73,8 @@ export default class Professor extends Component {
                             <NewsList type="pub" id={this.props.match.params.id}/>
                         </div>
                         <div className="right-box">
-                            <ProfessorList/>
+                            {/*<ProfessorList/>*/}
+                            <HotNewsList/>
                             <HotTags/>
                             <Follow/>
                         </div>

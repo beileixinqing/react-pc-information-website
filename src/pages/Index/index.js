@@ -21,7 +21,7 @@ export default class Index extends Component {
                             <NewsList type="index"/>
                         </div>
                         <div className="right-box">
-                            <ProfessorList/>
+                            {/*<ProfessorList/>*/}
                             <HotNewsList/>
                             <HotTags/>
                             <Follow/>
