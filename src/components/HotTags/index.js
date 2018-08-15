@@ -26,7 +26,9 @@ export default class HotTags extends Component {
                 });
             });
         }).then(function(res){
-            console.log(res);
+            if(res){
+                console.log(res);
+            }
         });
     }
     componentDidMount(){

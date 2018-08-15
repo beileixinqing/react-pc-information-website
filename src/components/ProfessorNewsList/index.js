@@ -28,13 +28,16 @@ export default class ProfessorNewsList extends Component {
                     if(value.id===newsId){
                         return newsList.splice(index,1);
                     }
+                    return newsList
                 })
                 _this.setState({
                     newsList:newsList,
                 });
             });
         }).then(function(res){
-            // console.log(res);
+            if(res){
+                console.log(res);
+            }
         });
     }
     componentDidMount(){

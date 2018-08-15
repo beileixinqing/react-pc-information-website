@@ -75,7 +75,6 @@ export default class NewsDetail extends Component {
                 console.log(res);
             }
         });
-        console.log(this.state.pubId)
     }
     componentDidMount(){
         this.fetchDetail(this.props.match.params.id);
@@ -87,13 +86,8 @@ export default class NewsDetail extends Component {
             _this.fetchDetail(nextProps.match.params.id);
         }
     }
-    shouldComponentUpdate(nextProps,nextState){
-        //写自己的逻辑判断是否需要更新组件
-        return true;
-    }
     render() {
         let newsDetail=this.state.newsDetail;
-        console.log(newsDetail)
         let createAt=moment(newsDetail.createAt).format("YYYY-MM/DD-HH:MM:SS");
         let year=createAt.split("-")[0];
         let date=createAt.split("-")[1];
