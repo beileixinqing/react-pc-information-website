@@ -217,12 +217,12 @@ export default class NewsList extends Component {
             })
         }
         let list=null;
-        if(newsList.length===0){
-            list=<div>暂无相关新闻</div>
-        }else if(newsList.length>0){
-            if(this.state.loading===true){
-                list=<div className="text-center"><img src={loading} alt=""/> 加载中 </div>
-            }else{
+        if(this.state.loading===true){
+            list=<div className="text-center"><img src={loading} alt=""/> 加载中 </div>
+        }else{
+            if(newsList.length===0){
+                list=<div>暂无相关新闻</div>
+            }else if(newsList.length>0){
                 list=<div>
                     {newsList.map((value,index) => {
                         return (<NewsListItem news={value} key={index} />)
