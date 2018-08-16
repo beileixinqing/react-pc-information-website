@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './index.less';
 import 'whatwg-fetch'
-// import host from '../../../config/host'
 import host from '../../config/host'
 
 import NewsListItem from '../../components/NewsListItem';
@@ -84,9 +83,6 @@ export default class NewsList extends Component {
                     loading:false
                 })
                 return response.json().then(function(res){
-                    if(res.content.length===0){
-                        _this.props.handleFetch("false");
-                    }
                     _this.setState({
                         newsList:res.content,
                         totalPages:res.totalPages
@@ -221,16 +217,20 @@ export default class NewsList extends Component {
             })
         }
         let list=null;
-        if(this.state.loading===true){
-            list=<div className="text-center"><img src={loading} alt=""/> 加载中 </div>
-        }else{
-            list=<div>
-                {newsList.map((value,index) => {
-                    return (<NewsListItem news={value} key={index} />)
-                })
-                }
-                <div className="btn-more transition" onClick={this.fetchMoreList}>{this.state.loadingText}</div>
-            </div>
+        if(newsList.length===0){
+            list=<div>暂无相关新闻</div>
+        }else if(newsList.length>0){
+            if(this.state.loading===true){
+                list=<div className="text-center"><img src={loading} alt=""/> 加载中 </div>
+            }else{
+                list=<div>
+                    {newsList.map((value,index) => {
+                        return (<NewsListItem news={value} key={index} />)
+                    })
+                    }
+                    <div className="btn-more transition" onClick={this.fetchMoreList}>{this.state.loadingText}</div>
+                </div>
+            }
         }
         return (
             <div>
