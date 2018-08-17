@@ -40,9 +40,6 @@ export default class ProfessorNewsList extends Component {
             }
         });
     }
-    componentDidMount(){
-        this.fetchHotNewsList();
-    }
     componentWillReceiveProps(nextProps) {
         let _this=this;
         if (nextProps.pubId !== this.props.pubId||nextProps.newsId!== this.props.newsId) {
