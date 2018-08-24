@@ -1,13 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
-import Index from '../pages/Index';
+import { BrowserRouter as Router, Route,Switch,Redirect } from "react-router-dom";
+import NewsList from '../pages/News';
 import NewsDetail from '../pages/NewsDetail';
-import Intro from '../pages/Intro';
 import About from '../pages/About';
 import Contact from '../pages/Contact';
+import Agreement from '../pages/Agreement';
+import Statement from '../pages/Statement';
+import Community from '../pages/Community';
 import Search from '../pages/Search';
-import ProfessorList from '../pages/ProfessorList';
-import Professor from '../pages/Professor';
+import Download from '../pages/Download';
+// import ProfessorList from '../pages/ProfessorList';
+// import Professor from '../pages/Professor';
 import Tag from '../pages/Tag';
 import NoMatch from '../pages/NoMatch';
 
@@ -18,25 +21,29 @@ const routes = [
     },
     {
         path: "/",
-        component: Index,
+        component: () => (
+            <Redirect to={`/news/recommend`}/>
+        ),
         exact:true
     },
     {
         path: "/index",
-        component: Index
+        component: () => (
+            <Redirect to={`/news/recommend`}/>
+        ),
     },
     {
-        path: "/intro",
-        component: Intro
+        path: "/news/:id",
+        component: NewsList,
     },
-    {
+    /*{
         path: "/professor_list",
         component: ProfessorList
     },
-    // {
-    //     path: "/professor_index",
-    //     component: ProfessorIndex
-    // },
+    {
+        path: "/professor_index",
+        component: ProfessorIndex
+    },*/
     {
         path: "/about",
         component: About
@@ -46,16 +53,32 @@ const routes = [
         component: Contact
     },
     {
-        path: "/news_list/search/:id",
+        path: "/agreement",
+        component: Agreement
+    },
+    {
+        path: "/statement",
+        component: Statement
+    },
+    {
+        path: "/community",
+        component: Community
+    },
+    {
+        path: "/news_list/search/:channelId/:id",
         component: Search
     },
-    {
+    /*{
         path: "/news_list/professor/:id",
         component: Professor
+    },*/
+    {
+        path: "/news_list/tag/:channelId/:tag",
+        component: Tag
     },
     {
-        path: "/news_list/tag/:tag",
-        component: Tag
+        path: "/download",
+        component: Download
     },
     {
         component: NoMatch

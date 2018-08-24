@@ -1,18 +1,27 @@
 @import "../../style/mixin.less";
 @import "../../style/iconfont.css";
 .header{
+  .top-bar{
+    border-bottom: 1px solid @border;
+    height:40px;
+    line-height:40px;
+    text-align: right;
+    .top-bar-text{
+      color:#666;
+      font-size: 14px;
+      &:hover{
+        color:#000;
+      }
+    }
+  }
   .logo-bar{
     height: 90px;
     line-height: 90px;
     border-bottom: 2px solid @pubColor;
-    .logo {
-      width:100px;
-      height:auto;
-      margin-top:10px;
-    }
     .logo-name{
       width:160px;
       height:auto;
+      margin-top:25px;
     }
     .search-bar{
       float: right;
@@ -67,7 +76,7 @@
     height: 48px;
     line-height: 48px;
     display: flex;
-    border-bottom: 2px solid @border;
+    border-bottom: 1px solid @border;
     ul {
       width: auto;
       height: 50px;
@@ -80,16 +89,24 @@
         //margin-right: 100px;
         a{
           display: inline-block;
+          width:auto;
           height:100%;
           padding:0 15px;
+          color:#000;
           &:hover{
             color: @white;
-            background-color:@pubColor;
+            display: inline-block;
+            width:auto;
+            height:100%;
+            background-color:@hover;
           }
         }
         .nav-active {
           color: @white;
-          background-color:@pubColor;
+          display: inline-block;
+          width:auto;
+          height:100%;
+          background-color:@hover;
         }
       }
     }

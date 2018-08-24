@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './index.less';
 
 import Header from '../../components/Header';
-import ProfessorList from '../../components/ProfessorList';
 import HotNewsList from '../../components/HotNewsList';
 import NewsList from '../../components/NewsList';
 import HotTags from '../../components/HotTags';
@@ -40,9 +39,8 @@ export default class Search extends Component {
                             </div>
                         </div>
                         <div className="right-box">
-                            <ProfessorList/>
-                            <HotNewsList/>
-                            <HotTags/>
+                            <HotNewsList channelId={this.props.match.params.channelId}/>
+                            <HotTags channelId={this.props.match.params.channelId}/>
                             <Follow/>
                         </div>
                     </div>

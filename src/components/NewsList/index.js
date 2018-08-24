@@ -5,9 +5,8 @@ import host from '../../config/host'
 
 import NewsListItem from '../../components/NewsListItem';
 import loading from '../../images/loading.gif';
-import channelId from '../../config/channel'
 
-export default class NewsList extends Component {
+export default class List extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -16,15 +15,15 @@ export default class NewsList extends Component {
             totalPages:0,
             newsList: [],
             loadingText:'点击加载更多',
-            loading:true
+            loading:true,
         };
         this.fetchNewsList=this.fetchNewsList.bind(this);
         this.fetchMoreList=this.fetchMoreList.bind(this);
     }
-    fetchNewsList(id,type){
+    fetchNewsList(id,type,channelId){
         let _this=this;
         if(type==='pub'){
-            fetch(`${host}/web/news/list_by_follow_with_pub_info?pubId=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+            fetch(`${host}/news/list?pubId=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -41,7 +40,7 @@ export default class NewsList extends Component {
                 // console.log(res);
             });
         }else if(type==='index'){
-            fetch(`${host}/web/news/list_with_pub_info?channelId=${channelId}&page=${_this.state.page}&size=${_this.state.size}`,{
+            fetch(`${host}/news/list?channelId=${channelId}&page=${_this.state.page}&size=${_this.state.size}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -58,7 +57,7 @@ export default class NewsList extends Component {
                 // console.log(res);
             });
         }else if(type==='tag'){
-            fetch(`${host}/web/news/list_by_tag_with_pub_info?channelId=${channelId}&tag=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+            fetch(`${host}/web/news/list_by_tag?channelId=${channelId}&tag=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -75,7 +74,7 @@ export default class NewsList extends Component {
                 // console.log(res);
             });
         }else if(type==='search'){
-            fetch(`${host}/web/news/search_in_channel_with_pub_info?channelId=${channelId}&q=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+            fetch(`${host}/web/news/search?q=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                 method:'GET',
                 mode:'cors',
             }).then(function(response){
@@ -98,6 +97,7 @@ export default class NewsList extends Component {
         let page=_this.state.page+1;
         let id=this.props.id;
         let type=this.props.type;
+        let channelId=this.props.channelId;
         if(type==='pub'){
             _this.setState({
                 page:page
@@ -127,7 +127,7 @@ export default class NewsList extends Component {
                 page:page
             },function () {
                 if(_this.state.page<_this.state.totalPages){
-                    fetch(`${host}/web/news/list_with_pub_info?channelId=${channelId}&page=${_this.state.page}&size=${_this.state.size}`,{
+                    fetch(`${host}/news/list?channelId=${channelId}&page=${_this.state.page}&size=${_this.state.size}`,{
                         method:'GET',
                         mode:'cors',
                     }).then(function(response){
@@ -175,7 +175,7 @@ export default class NewsList extends Component {
                 page:page
             },function () {
                 if(_this.state.page<_this.state.totalPages){
-                    fetch(`${host}/web/news/search_in_channel_with_pub_info?channelId=${channelId}q=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
+                    fetch(`${host}/web/news/search?q=${id}&page=${_this.state.page}&size=${_this.state.size}`,{
                         method:'GET',
                         mode:'cors',
                     }).then(function(response){
@@ -199,12 +199,12 @@ export default class NewsList extends Component {
         }
     }
     componentDidMount(){
-        this.fetchNewsList(this.props.id,this.props.type);
+        this.fetchNewsList(this.props.id,this.props.type,this.props.channelId);
     }
     componentWillReceiveProps(nextProps) {
         let _this=this;
-        if (nextProps.id !== this.props.id||nextProps.type !== this.props.type) {
-            _this.fetchNewsList(nextProps.id,nextProps.type);
+        if (nextProps.id !== this.props.id||nextProps.type !== this.props.type||nextProps.channelId !== this.props.channelId) {
+            _this.fetchNewsList(nextProps.id,nextProps.type,nextProps.channelId);
         }
     }
     render() {

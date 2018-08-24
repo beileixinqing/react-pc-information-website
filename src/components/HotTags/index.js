@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import './index.less';
-import channelId from '../../config/channel'
 import host from '../../config/host'
 
 import TitleText from '../TitleText';
@@ -14,7 +13,7 @@ export default class HotTags extends Component {
         };
         this.fetchHotTags=this.fetchHotTags.bind(this);
     }
-    fetchHotTags(){
+    fetchHotTags(channelId){
         let _this=this;
         fetch(`${host}/web/news/list_channel_tags?channelId=${channelId}&page=1&size=10`,{
             method:'GET',
@@ -32,7 +31,13 @@ export default class HotTags extends Component {
         });
     }
     componentDidMount(){
-        this.fetchHotTags();
+        this.fetchHotTags(this.props.channelId);
+    }
+    componentWillReceiveProps(nextProps) {
+        let _this=this;
+        if (nextProps.channelId !== this.props.channelId) {
+            _this.fetchHotTags(nextProps.channelId);
+        }
     }
     render() {
         let tagsList=this.state.tagsList;
@@ -42,7 +47,7 @@ export default class HotTags extends Component {
                 <ul className="tags-box">
                     {
                         tagsList.map((value, index) => {
-                            return (<li key={index}><Link to={"/news_list/tag/"+value.tag}>{value.tag}</Link></li>)
+                            return (<li key={index}><Link to={"/news_list/tag/"+this.props.channelId+"/"+value.tag}>{value.tag}</Link></li>)
                         })
                     }
                 </ul>

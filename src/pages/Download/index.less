@@ -1,0 +1,76 @@
+@import "../../style/mixin.less";
+@import "../../style/iconfont.css";
+.download{
+  .download-bg{
+    background-color:#fff;
+    min-height:800px;
+    padding:100px;
+    .container{
+      .left-box{
+        width:50%;
+        color:#666;
+        float: left;
+        .title{
+          font-size: 34px;
+          margin:20px 0;
+        }
+        h1{
+          font-size: 27px;
+          margin:20px 0;
+        }
+        p{
+          font-size: 19px;
+          margin:20px 0;
+        }
+        .code-box{
+          margin:0;
+          img{
+            width:190px;
+            height:auto;
+          }
+        }
+      }
+      .right-box{
+        width:50%;
+        float: left;
+        img{
+          width:340px;
+        }
+      }
+      .download-btn-box{
+        padding-top:120px;
+        clear: both;
+        text-align: center;
+        cursor: pointer;
+        .btn-download{
+          display: inline-block;
+          border-radius:50px;
+          width:260px;
+          height:60px;
+          line-height:60px;
+          text-align: center;
+          font-size: 24px;
+          color:#fff;
+          .iconfont{
+            font-size: 24px;
+            margin-right:10px;
+          }
+        }
+        .btn-download-iphone{
+          background-color:#44c4f4;
+          margin-right:40px;
+          .iconfont{
+            color:#fff;
+          }
+        }
+        .btn-download-android{
+          background-color:#badb4c;
+          border:1px solid @border;
+          .iconfont{
+            color:#fff;
+          }
+        }
+      }
+    }
+  }
+}

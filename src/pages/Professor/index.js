@@ -5,7 +5,6 @@ import './index.less';
 import host from '../../config/host'
 
 import Header from '../../components/Header';
-import ProfessorList from '../../components/ProfessorList';
 import NewsList from '../../components/NewsList';
 import HotTags from '../../components/HotTags';
 import HotNewsList from '../../components/HotNewsList';

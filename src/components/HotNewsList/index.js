@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import './index.less';
-import channelId from '../../config/channel'
 import host from '../../config/host'
 
 import TitleText from '../TitleText';
@@ -14,7 +13,7 @@ export default class HotNewsList extends Component {
         };
         this.fetchHotNewsList=this.fetchHotNewsList.bind(this);
     }
-    fetchHotNewsList(){
+    fetchHotNewsList(channelId){
         let _this=this;
         fetch(`${host}/web/news/list?channelId=${channelId}&page=0&size=10&sort=read,desc`,{
             method:'GET',
@@ -30,7 +29,13 @@ export default class HotNewsList extends Component {
         });
     }
     componentDidMount(){
-        this.fetchHotNewsList();
+        this.fetchHotNewsList(this.props.channelId);
+    }
+    componentWillReceiveProps(nextProps) {
+        let _this=this;
+        if (nextProps.channelId !== this.props.channelId) {
+            _this.fetchHotNewsList(nextProps.channelId);
+        }
     }
     render() {
         let newsList=this.state.newsList;
@@ -46,7 +51,7 @@ export default class HotNewsList extends Component {
                                         <div className="news-left">
                                             <img src={value.thumb[0]} alt=""/>
                                         </div>
-                                        <div className="news-right">
+                                        <div className="news-right" style={{"WebkitBoxOrient": "vertical"}}>
                                             {value.title}
                                         </div>
                                     </Link>

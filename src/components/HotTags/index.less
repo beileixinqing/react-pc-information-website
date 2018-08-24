@@ -7,7 +7,7 @@
     height:auto;
     li{
       float: left;
-      border:1px solid @pubColor;
+      border:1px solid @gray;
       border-radius:10px;
       width:auto;
       padding:0 10px;
@@ -18,12 +18,13 @@
       cursor: pointer;
       a{
         font-size: 13px;
-        color:@pubColor;
+        color:@gray;
       }
       &:hover{
-        background-color:@pubColor;
+        //background-color:@pubColor;
+        border:1px solid @pubColor;
         a{
-          color:@white;
+          color:@pubColor;
         }
       }
     }

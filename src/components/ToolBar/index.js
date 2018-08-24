@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './index.less';
-import code from '../../images/zhiku_qrcode.jpg';
+import code from '../../images/code_download_text.png';
 
 export default class ToolBar extends Component {
     constructor(props){
@@ -17,7 +17,6 @@ export default class ToolBar extends Component {
                     <i className="iconfont icon-erweima"></i>
                     <div className="tool-item-hover code-hover">
                         <img src={code} alt=""/>
-                        <p>扫码关注公众号</p>
                     </div>
                 </div>
                 <div className="tool-item" onClick={this.handleScrollToTop}>

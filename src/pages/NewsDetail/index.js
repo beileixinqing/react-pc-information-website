@@ -3,16 +3,21 @@ import { Link } from "react-router-dom";
 import moment from 'moment'
 import 'moment/locale/zh-cn';
 import './index.less';
-import code from '../../images/zhiku_qrcode.jpg';
 import loading from '../../images/loading.gif';
 
 import host from '../../config/host'
 
 import Header from '../../components/Header';
-import ProfessorNewsList from '../../components/ProfessorNewsList';
+import RelatedNewsList from '../../components/RelatedNewsList';
 import ToolBar from '../../components/ToolBar';
 import Footer from '../../components/Footer';
 
+function newsLikeFilter(n) {
+    if(n>=10000){
+        n=(n/10000).toFixed(1)+"万"
+    }
+    return n
+}
 export default class NewsDetail extends Component {
     constructor(props){
         super(props);
@@ -64,11 +69,25 @@ export default class NewsDetail extends Component {
             return response.json().then(function(res){
                 _this.setState({
                     newsDetail:res.news,
-                    likeCount:res.news.like?res.news.like:"",
+                    likeCount:res.news.like?newsLikeFilter(res.news.like):"",
                     avatarUrl:res.pubInfo?res.pubInfo.avatarUrl:"https://cdn.zhongwentoutiao.com/user%403x.png",
                     pubId:res.pubInfo?res.pubInfo.pubId:"",
                     intro:res.pubInfo?res.pubInfo.introduction:"",
                 });
+                document.title=res.news.title;
+                let reg1 = /<p[^>]*>(?:(?!<\/p>)[\s\S])*<\/p>/i;
+                // let reg1 = /<p[^>]*>[^</?(?:img).*?>|</?[pP]*?>](.*?)<\/p>/i;
+                let reg2 = /<(\/)*p>/gi;
+                let description=res.news.content.match(reg1)[0].replace(reg2,"");
+                let descriptionLen=description.length;
+                let metas = document.getElementsByTagName("meta");
+                if(descriptionLen>150){
+                    metas["description"].setAttribute('content',description.substr(0,150));
+                }else{
+                    metas["description"].setAttribute('content',description);
+                }
+                let keywords=res.news.tag.join(",")?res.news.tag.join(","):"译世界资讯，译世界资讯官网，头条资讯，华人资讯，头条新闻，中文资讯，海外资讯，华语互动";
+                metas["keywords"].setAttribute('content',keywords);
             });
         }).then(function(res){
             if(res){
@@ -79,6 +98,7 @@ export default class NewsDetail extends Component {
     componentDidMount(){
         this.fetchDetail(this.props.match.params.id);
         moment.locale('zh-cn');
+        document.getElementById('root').scrollIntoView(true);//为ture返回顶部，false为底部
     }
     componentWillReceiveProps(nextProps) {
         let _this=this;
@@ -96,7 +116,7 @@ export default class NewsDetail extends Component {
         let tagInfo="";
         if(newsDetail.tag&&newsDetail.tag.length>0){
             tagList=newsDetail.tag.map((value,index) => {
-                return (<Link to={"/news_list/tag/"+value} key={index} className="tagItem">{value}</Link>)
+                return (<Link to={"/news_list/tag/"+newsDetail.channelId+"/"+value} key={index} className="tagItem">{value}</Link>)
             })
             tagInfo=<p className="tag-info">标签：{tagList}</p>;
         }
@@ -116,24 +136,27 @@ export default class NewsDetail extends Component {
                         <div className="time">
                             {time}
                         </div>
-                        <div>
-                            <Link className="author" to={"/news_list/professor/"+this.state.pubId}>
-                                <div className="avatar">
-                                    <img src={this.state.avatarUrl} alt=""/>
-                                </div>
-                                <div>
-                                    {newsDetail.authorName}
-                                </div>
-                                <br/>
-                                <div>
-                                    {this.state.intro}
-                                </div>
-                            </Link>
+                        <div className="author">
+                            <div className="avatar">
+                                <img src={this.state.avatarUrl} alt=""/>
+                            </div>
+                            <div>
+                                {newsDetail.authorName}
+                            </div>
+                            <br/>
+                            <div>
+                                {this.state.intro}
+                            </div>
                         </div>
                     </div>
                     <div className="detail-content">
+                        <div className="breadcrumb">
+                            <Link className="" to={'/news/'+newsDetail.channelId}>{newsDetail.channelName}</Link>
+                            &nbsp;&nbsp;>&nbsp;&nbsp;正文
+                        </div>
                         <div className="detail-title">{newsDetail.title}</div>
                         <div className="detail-article" dangerouslySetInnerHTML = {{ __html:newsDetail.content }}></div>
+                        <p className="color-6">责任编辑：{newsDetail.editorName}</p>
                         <div className="end-line">
                             <p className="end-text through"><span>THE END</span></p>
                             <div className={`zan-text ${this.state.like === true ? "icon-active" : ""}`} >
@@ -143,17 +166,10 @@ export default class NewsDetail extends Component {
                                 &nbsp;&nbsp;{this.state.likeCount}
                             </div>
                             <div>{tagInfo}</div>
-                            <p className="statement">本文系华语智库专家 {newsDetail.authorName} 专稿，转载请注明出处、作者和本文链接</p>
-                        </div>
-                        <div className="code-box">
-                            <img src={code} alt=""/>
-                            <p>
-                                还没看够？扫描识别上方二维码，或在微信公众号中搜索「华语智库」或「huayujunshi」，即可获得华语智库每日最新内容推送、参与互动活动。
-                            </p>
                         </div>
                     </div>
                 </div>
-                <ProfessorNewsList pubId={this.state.pubId} newsId={this.props.match.params.id} />
+                <RelatedNewsList newsId={this.props.match.params.id} />
             </div>
         }
         return (

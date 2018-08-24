@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './index.less';
 
 import Header from '../../components/Header';
-import ProfessorList from '../../components/ProfessorList';
 import HotNewsList from '../../components/HotNewsList';
 import NewsList from '../../components/NewsList';
 import HotTags from '../../components/HotTags';
@@ -16,6 +15,10 @@ export default class Tag extends Component {
         this.state = {
             tag:this.props.match.params.tag
         };
+    }
+
+    componentDidMount() {
+        console.log(this.props.match)
     }
     componentWillReceiveProps(nextProps) {
         let _this=this;
@@ -35,12 +38,11 @@ export default class Tag extends Component {
                             <div className="tag-box">
                                 <p><span className="tag-highlight">{this.state.tag}</span>相关文章</p>
                             </div>
-                            <NewsList type="tag" id={this.state.tag}/>
+                            <NewsList type="tag" id={this.state.tag} channelId={this.props.match.params.channelId}/>
                         </div>
                         <div className="right-box">
-                            <ProfessorList/>
-                            <HotNewsList/>
-                            <HotTags/>
+                            <HotNewsList channelId={this.props.match.params.channelId}/>
+                            <HotTags channelId={this.props.match.params.channelId}/>
                             <Follow/>
                         </div>
                     </div>
