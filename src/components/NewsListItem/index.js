@@ -37,7 +37,7 @@ export default class NewsListItem extends Component {
                                style={{"WebkitBoxOrient": "vertical"}}>{news.pubInfo.introduction}</p>
                         </div>
                     </div>
-                    <span className="right-margin-12">{newsLikeFilter(news.like)} 赞</span>
+                    <span className="right-margin-12">{newsLikeFilter(news.like)}</span>
                     <span>{moment(news.createAt).fromNow()}</span>
                 </div>;
                 let id = '/detail/' + news.id;
@@ -69,7 +69,7 @@ export default class NewsListItem extends Component {
                             }
                         </div>
                         <div className="item-info">
-                            <span className="right-margin-12">{newsLikeFilter(news.like)} 赞</span>
+                            <span className="right-margin-12"><i className="iconfont icon-dianzan"></i> {newsLikeFilter(news.like)}</span>
                             <span>{moment(news.createAt).fromNow()}</span>
                         </div>
                     </div>
@@ -77,14 +77,14 @@ export default class NewsListItem extends Component {
             } else {
                 authorInfo = <div className="item-info">
                     <span className="right-margin-12">{news.authorName}</span>
-                    <span className="right-margin-12">{newsLikeFilter(news.like)} 赞</span>
+                    <span className="right-margin-12"><i className="iconfont icon-dianzan"></i> {newsLikeFilter(news.like)}</span>
                     <span>{moment(news.createAt).fromNow()}</span>
                 </div>;
             }
         } else {
             authorInfo = <div className="item-info">
                 <span className="right-margin-12">{news.authorName}</span>
-                <span className="right-margin-12">{newsLikeFilter(news.like)} 赞</span>
+                <span className="right-margin-12"><i className="iconfont icon-dianzan"></i> {newsLikeFilter(news.like)}</span>
                 <span>{moment(news.createAt).fromNow()}</span>
             </div>;
         }

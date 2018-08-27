@@ -23,6 +23,7 @@ class News extends Component {
         this.setMetas=this.setMetas.bind(this);
     }
     setMetas(){
+        document.title="译世界资讯【官方网站】";
         let metas = document.getElementsByTagName("meta");
         metas["description"].setAttribute('content',"译世界资讯是专门针对海外华人的信息资讯类网站，提供团购、房屋租售、求职招聘、留学移民、旅游定制、汽车租售、征婚交友、二手转让等海量商业资讯，是华人生活理想的交流平台。");
         let keywords="译世界资讯，译世界资讯官网，头条资讯，华人资讯，头条新闻，中文资讯，海外资讯，华语互动";

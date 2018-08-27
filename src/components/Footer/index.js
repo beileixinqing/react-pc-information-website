@@ -46,11 +46,13 @@ export default class NewsList extends Component {
                     }
                     <span><a href="https://internal.zhongwentoutiao.com/admin/news_list" target="_blank" rel="noopener noreferrer">管理员入口</a></span>
                     |
-                    <span><a href="https://www.zhongwentoutiao.com/pub/news_list" target="_blank" rel="noopener noreferrer">中文号</a></span>
+                    <span><a href="https://internal.zhongwentoutiao.com/pub/news_list" target="_blank" rel="noopener noreferrer">中文号</a></span>
                     |
                     <span><a href="https://www.shuzizhongwen.com/" target="_blank" rel="noopener noreferrer">唐人家</a></span>
                     |
                     <span><a href="https://www.huayuzhiku.com" target="_blank" rel="noopener noreferrer">华语智库</a></span>
+                    |
+                    <span><a href="https://m.zhongwentoutiao.com" rel="noopener noreferrer">手机版</a></span>
                 </p>
                 <p>
                     &copy; Copyright &copy;2003-2018 HEYDAY INTERACTIVE IT CO., LTD.

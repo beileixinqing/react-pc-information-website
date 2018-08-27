@@ -12,12 +12,6 @@ import RelatedNewsList from '../../components/RelatedNewsList';
 import ToolBar from '../../components/ToolBar';
 import Footer from '../../components/Footer';
 
-function newsLikeFilter(n) {
-    if(n>=10000){
-        n=(n/10000).toFixed(1)+"万"
-    }
-    return n
-}
 export default class NewsDetail extends Component {
     constructor(props){
         super(props);
@@ -69,7 +63,7 @@ export default class NewsDetail extends Component {
             return response.json().then(function(res){
                 _this.setState({
                     newsDetail:res.news,
-                    likeCount:res.news.like?newsLikeFilter(res.news.like):"",
+                    likeCount:res.news.like?res.news.like:"",
                     avatarUrl:res.pubInfo?res.pubInfo.avatarUrl:"https://cdn.zhongwentoutiao.com/user%403x.png",
                     pubId:res.pubInfo?res.pubInfo.pubId:"",
                     intro:res.pubInfo?res.pubInfo.introduction:"",
@@ -124,6 +118,10 @@ export default class NewsDetail extends Component {
         if(this.state.loading===true){
             detail=<div className="text-center"><img src={loading} alt=""/> 加载中 </div>
         }else{
+            let editorName=null;
+            if(newsDetail.editorName){
+                editorName=<p className="color-6">责任编辑：{newsDetail.editorName}</p>
+            }
             detail=<div className="detailContainer">
                 <div className="left-box-detail">
                     <div className="detail-info">
@@ -156,7 +154,7 @@ export default class NewsDetail extends Component {
                         </div>
                         <div className="detail-title">{newsDetail.title}</div>
                         <div className="detail-article" dangerouslySetInnerHTML = {{ __html:newsDetail.content }}></div>
-                        <p className="color-6">责任编辑：{newsDetail.editorName}</p>
+                        {editorName}
                         <div className="end-line">
                             <p className="end-text through"><span>THE END</span></p>
                             <div className={`zan-text ${this.state.like === true ? "icon-active" : ""}`} >
