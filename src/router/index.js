@@ -53,15 +53,15 @@ const routes = [
         component: Contact
     },
     {
-        path: "/agreement",
+        path: "/terms",
         component: Agreement
     },
     {
-        path: "/statement",
+        path: "/privacy",
         component: Statement
     },
     {
-        path: "/community",
+        path: "/convention",
         component: Community
     },
     {

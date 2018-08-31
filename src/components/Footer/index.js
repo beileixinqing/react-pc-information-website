@@ -6,11 +6,11 @@ import 'whatwg-fetch'
 const footerItem=[
     {
         name:"用户协议",
-        link:"/agreement"
+        link:"/terms"
     },
     {
         name:"隐私声明",
-        link:"/statement"
+        link:"/privacy"
     },
     {
         name:"关于我们",
@@ -22,7 +22,7 @@ const footerItem=[
     },
     {
         name:"生活社区公约",
-        link:"/community"
+        link:"/convention"
     },
 ];
 

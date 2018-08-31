@@ -7,11 +7,11 @@ import logoName from '../../images/logo_name.png';
 const topBarItem=[
     {
         name:"用户协议",
-        link:"/agreement"
+        link:"/terms"
     },
     {
         name:"隐私声明",
-        link:"/statement"
+        link:"/privacy"
     },
     {
         name:"关于我们",
@@ -23,7 +23,7 @@ const topBarItem=[
     },
     {
         name:"生活社区公约",
-        link:"/community"
+        link:"/convention"
     },
     {
         name:"下载APP",
