@@ -33,7 +33,7 @@ class News extends Component {
         this.setMetas();
     }
     componentWillReceiveProps(nextProps) {
-        const { match, location, history } = this.props;
+        const { location } = this.props;
         if (nextProps.location.pathname !== location.pathname) {
             this.setMetas();
         }

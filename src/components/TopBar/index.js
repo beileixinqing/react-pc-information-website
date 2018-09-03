@@ -50,12 +50,6 @@ export default class TopBar extends Component {
                                     )
                                 })
                             }
-                            {/*<li>*/}
-                                {/*<NavLink to="/about" activeClassName="nav-active">关于我们</NavLink>*/}
-                            {/*</li>*/}
-                            {/*<li>*/}
-                                {/*<NavLink to="/contact" activeClassName="nav-active">联系我们</NavLink>*/}
-                            {/*</li>*/}
                         </ul>
                     </div>
                 </div>

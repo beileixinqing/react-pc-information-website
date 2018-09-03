@@ -15,7 +15,7 @@ export default class Contact extends Component {
                         <p>联系人：陈女士</p>
                         <p>微信：mailziyi</p>
                         <p>电话：13811955092</p>
-                        <p>邮件：hjadv@126.com</p>
+                        <p>邮件：mailziyi@126.com</p>
                         <p>地址：北京市朝阳区朝阳门外金台里2号首都经贸大学红庙校区14号楼2层</p>
                         <p className="text-bold">意见反馈</p>
                         <p>电话：010-53381611</p>
