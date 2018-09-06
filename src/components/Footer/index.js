@@ -5,6 +5,10 @@ import 'whatwg-fetch'
 
 const footerItem=[
     {
+        name:"下载APP",
+        link:"/download"
+    },
+    {
         name:"用户协议",
         link:"/terms"
     },

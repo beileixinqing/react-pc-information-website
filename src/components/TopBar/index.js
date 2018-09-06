@@ -25,10 +25,10 @@ const topBarItem=[
         name:"生活社区公约",
         link:"/convention"
     },
-    {
+    /*{
         name:"下载APP",
         link:"/download"
-    },
+    },*/
 ];
 
 export default class TopBar extends Component {

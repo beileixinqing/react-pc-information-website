@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import './index.less';
 
-import Footer from '../../components/Footer';
+// import Footer from '../../components/Footer';
 import code from '../../images/code_download_text.png';
-import TopBar from "../../components/TopBar/index";
+import arrow from '../../images/arrow.png';
+import more from '../../images/more.png';
 
 function isWeixinBrowser() {
     let ua = navigator.userAgent.toLowerCase();
     return (/micromessenger/.test(ua));
 }
 
-function isAndroid() {
+/*function isAndroid() {
     let ua = navigator.userAgent.toLowerCase();
     return (/android/.test(ua));
 }
@@ -18,15 +19,21 @@ function isAndroid() {
 function isIos() {
     let ua = navigator.userAgent.toLowerCase();
     return (/(iphone|ipod|ipad)/.test(ua));
-}
+}*/
 export default class Download extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            show: "none",
+        };
         this.goToAppStore=this.goToAppStore.bind(this);
         this.goToAndroid=this.goToAndroid.bind(this);
         this.goAndroidDownloadUrl=this.goAndroidDownloadUrl.bind(this);
         this.goAppstoreDownloadUrl=this.goAppstoreDownloadUrl.bind(this);
         this.goYingYongBaoDownloadUrl=this.goYingYongBaoDownloadUrl.bind(this);
+        this.goBaiDuDownloadUrl=this.goBaiDuDownloadUrl.bind(this);
+        this.goWanDouJiaDownloadUrl=this.goWanDouJiaDownloadUrl.bind(this);
+        this.closeMask=this.closeMask.bind(this);
     }
     //安卓下载
     goAndroidDownloadUrl() {
@@ -41,24 +48,37 @@ export default class Download extends Component {
         window.location.href = "http://cdn.zhongwentoutiao.com/app/%E8%AF%91%E4%B8%96%E7%95%8C%E8%B5%84%E8%AE%AF%E6%9C%80%E6%96%B0%E7%89%88.apk"
         // window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.xinwenhd.app&from=singlemessage&isappinstalled=1"
     }
+    //百度手机助手下载
+    goBaiDuDownloadUrl() {
+        window.location.href = "https://shouji.baidu.com/software/24687227.html"
+    }
+    //豌豆荚下载
+    goWanDouJiaDownloadUrl() {
+        window.location.href = "https://www.wandoujia.com/apps/com.xinwenhd.app"
+    }
     //去Appstore下载
     goToAppStore(){
-        if (isWeixinBrowser()) {
-            this.goAppstoreDownloadUrl();
-        } else {
-            this.goAppstoreDownloadUrl();
-        }
+        this.goAppstoreDownloadUrl();
     }
     //去andriod下载
     goToAndroid(){
+        let _this=this;
         if (isWeixinBrowser()) {
-            this.goYingYongBaoDownloadUrl();
+            _this.setState({
+                show:"block"
+            })
+            // _this.goWanDouJiaDownloadUrl();
         } else {
-            this.goYingYongBaoDownloadUrl();
+            _this.goAndroidDownloadUrl();
         }
     }
+    closeMask(){
+        this.setState({
+            show:"none"
+        })
+    }
     componentDidMount() {
-        if (isWeixinBrowser()) {
+        /*if (isWeixinBrowser()) {
             if (isIos()) {
                 this.goAppstoreDownloadUrl();
             } else if (isAndroid()) {
@@ -70,12 +90,11 @@ export default class Download extends Component {
             } else {
                 this.goAndroidDownloadUrl();
             }
-        }
+        }*/
     }
     render() {
         return (
             <div className="download">
-                <TopBar/>
                 <div className="download-bg">
                     <div className="container">
                         <div className="left-box">
@@ -102,9 +121,16 @@ export default class Download extends Component {
                                 andriod版下载
                             </span>
                         </div>
+                        <div className="maskBox">
+                            <div className="mask" onClick={this.closeMask} style={{'display':this.state.show}}>
+                                <p><span className="icon-arrow"><img src={arrow} alt=""/></span></p>
+                                <p>点击右上角 <span className="icon-more"><img src={more} alt=""/></span>选择从浏览器打开</p>
+                                <p>即可下载app</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <Footer/>
+                {/*<Footer/>*/}
             </div>
         );
     }
